@@ -1,0 +1,51 @@
+//Любевич Нікіта 201 група 4 варіант завдання
+#include <stdio.h>
+#include <stdlib.h>
+#include <time.h>
+#define MAX 100
+
+int main(void)
+{
+    int queue[MAX];
+    int n, i;
+    int product = 1;
+
+    srand(time(NULL));
+    printf("Введіть кількість елементів черги (1-%d): ", MAX - 1);
+
+    if (scanf("%d", &n) != 1)
+    {
+        printf("Помилка: потрібно ввести ціле число!\n");
+        return 1;
+    }
+
+    if (n <= 0 || n > MAX - 1)
+    {
+        printf("Помилка: кількість елементів має бути від 1 до %d!\n", MAX - 1);
+        return 1;
+    }
+
+    for (i = 0; i < n; i++)
+        queue[i] = rand() % 10 + 1;
+
+    printf("Черга (початок -> кінець): ");
+    for (i = 0; i < n; i++)
+        printf("%d ", queue[i]);
+    printf("\n");
+
+    for (i = 0; i < n; i++)
+        product *= queue[i];
+
+    for (i = n; i > 0; i--)
+        queue[i] = queue[i - 1];
+
+    queue[0] = product;
+    n++;
+
+    printf("Черга після додавання добутку на початок: ");
+    for (i = 0; i < n; i++)
+        printf("%d ", queue[i]);
+    printf("\n");
+
+    return 0;
+}
