@@ -1,0 +1,51 @@
+//Любевич Нікіта 201 група 4 варіант завдання 
+#include <stdio.h>
+#include <stdlib.h>
+#include <time.h>
+#define MAX 100
+
+int main(void)
+{
+    int stack[MAX];
+    int n, i, j;
+    srand(time(NULL));
+    printf("Введіть кількість елементів стека (1-%d): ", MAX);
+
+    if (scanf("%d", &n) != 1)
+    {
+        printf("Помилка: потрібно ввести ціле число!\n");
+        return 1;
+    }
+
+    if (n <= 0 || n > MAX)
+    {
+        printf("Помилка: кількість елементів має бути від 1 до %d!\n", MAX);
+        return 1;
+    }
+
+    for (i = 0; i < n; i++)
+        stack[i] = rand() % 100 - 50;
+
+    printf("Стек (основа -> вершина): ");
+    for (i = 0; i < n; i++)
+        printf("%d ", stack[i]);
+    printf("\n");
+
+    j = 0;
+    for (i = 0; i < n; i++)
+    {
+        if (i % 2 == 0)
+        {
+            stack[j] = stack[i];
+            j++;
+        }
+    }
+    n = j;
+
+    printf("Стек після видалення кожного другого елемента: ");
+    for (i = 0; i < n; i++)
+        printf("%d ", stack[i]);
+    printf("\n");
+
+    return 0;
+}
