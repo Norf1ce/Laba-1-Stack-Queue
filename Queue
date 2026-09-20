@@ -4,47 +4,48 @@
 #include <time.h>
 #define MAX 100
 
-int main(void)
-{
-    int queue[MAX];
-    int n, i;
-    int product = 1;
-
+int main(void) {
+    int a1[MAX + 1], a2[MAX + 1];
+    int n, k, i1, j1, i2, j2;
+    int x, product = 1;
+    
     srand(time(NULL));
     printf("Введіть кількість елементів черги (1-%d): ", MAX - 1);
-
-    if (scanf("%d", &n) != 1)
-    {
-        printf("Помилка: потрібно ввести ціле число!\n");
+    if (scanf("%d", &n) != 1) {
+        printf("Помилка: потрібно ввести ціле число, а не літери!\n");
+        return 1;
+    }
+    if (n <= 0 || n > MAX - 1) {
+        printf("Помилка: кількість має бути від 1 до %d!\n", MAX - 1);
         return 1;
     }
 
-    if (n <= 0 || n > MAX - 1)
-    {
-        printf("Помилка: кількість елементів має бути від 1 до %d!\n", MAX - 1);
-        return 1;
-    }
-
-    for (i = 0; i < n; i++)
-        queue[i] = rand() % 10 + 1;
+    i1 = 1;
+    for (k = 1; k <= n; k++)
+        a1[k] = rand() % 10 + 1;
+    j1 = n;
 
     printf("Черга (початок -> кінець): ");
-    for (i = 0; i < n; i++)
-        printf("%d ", queue[i]);
+    for (k = i1; k <= j1; k++)
+        printf("%d ", a1[k]);
     printf("\n");
 
-    for (i = 0; i < n; i++)
-        product *= queue[i];
+    i2 = 1;
+    j2 = 0;
+    while (i1 <= j1) {
+        x = a1[i1];
+        i1++;
+        product *= x;
+        j2++;
+        a2[j2] = x;
+    }
 
-    for (i = n; i > 0; i--)
-        queue[i] = queue[i - 1];
-
-    queue[0] = product;
-    n++;
+    i2 = i2 - 1;
+    a2[i2] = product;
 
     printf("Черга після додавання добутку на початок: ");
-    for (i = 0; i < n; i++)
-        printf("%d ", queue[i]);
+    for (k = i2; k <= j2; k++)
+        printf("%d ", a2[k]);
     printf("\n");
 
     return 0;
