@@ -4,47 +4,57 @@
 #include <time.h>
 #define MAX 100
 
-int main(void)
-{
-    int stack[MAX];
-    int n, i, j;
+int main(void) {
+    int stack1[MAX + 1], stack2[MAX + 1], stack3[MAX + 1];
+    int top1 = 0, top2 = 0, top3 = 0;
+    int n, i, x, pos;
+    
     srand(time(NULL));
     printf("Введіть кількість елементів стека (1-%d): ", MAX);
-
-    if (scanf("%d", &n) != 1)
-    {
-        printf("Помилка: потрібно ввести ціле число!\n");
+    if (scanf("%d", &n) != 1) {
+        printf("Помилка: потрібно ввести ціле число, а не літери!\n");
+        return 1;
+    }
+    if (n <= 0 || n > MAX) {
+        printf("Помилка: кількість має бути від 1 до %d!\n", MAX);
         return 1;
     }
 
-    if (n <= 0 || n > MAX)
-    {
-        printf("Помилка: кількість елементів має бути від 1 до %d!\n", MAX);
-        return 1;
+    for (i = 0; i < n; i++) {
+        top1++;
+        stack1[top1] = rand() % 100 - 50;
     }
-
-    for (i = 0; i < n; i++)
-        stack[i] = rand() % 100 - 50;
 
     printf("Стек (основа -> вершина): ");
-    for (i = 0; i < n; i++)
-        printf("%d ", stack[i]);
+    for (i = 1; i <= top1; i++)
+        printf("%d ", stack1[i]);
     printf("\n");
 
-    j = 0;
-    for (i = 0; i < n; i++)
-    {
-        if (i % 2 == 0)
-        {
-            stack[j] = stack[i];
-            j++;
+    while (top1 > 0) {
+        x = stack1[top1];
+        top1--;
+        top2++;
+        stack2[top2] = x;
+    }
+
+    pos = 0;
+    while (top2 > 0) {
+        x = stack2[top2];
+        top2--;
+        pos++;
+        if (pos % 2 != 0) {
+            top3++;
+            stack3[top3] = x;
         }
     }
-    n = j;
 
     printf("Стек після видалення кожного другого елемента: ");
-    for (i = 0; i < n; i++)
-        printf("%d ", stack[i]);
+    for (i = 1; i <= top3; i++)
+        printf("%d ", stack3[i]);
+    printf("\n");
+
+    return 0;
+}
     printf("\n");
 
     return 0;
