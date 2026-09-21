@@ -1,4 +1,3 @@
-//Любевич Нікіта 201 група 4 варіант завдання 
 #include <stdio.h>
 #include <stdlib.h>
 #include <time.h>
@@ -8,7 +7,7 @@ int main(void) {
     int stack1[MAX + 1], stack2[MAX + 1], stack3[MAX + 1];
     int top1 = 0, top2 = 0, top3 = 0;
     int n, i, x, pos;
-    
+
     srand(time(NULL));
     printf("Введіть кількість елементів стека (1-%d): ", MAX);
     if (scanf("%d", &n) != 1) {
@@ -51,10 +50,6 @@ int main(void) {
     printf("Стек після видалення кожного другого елемента: ");
     for (i = 1; i <= top3; i++)
         printf("%d ", stack3[i]);
-    printf("\n");
-
-    return 0;
-}
     printf("\n");
 
     return 0;
